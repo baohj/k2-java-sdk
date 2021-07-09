@@ -1,13 +1,13 @@
 package com.mei.hui.k2javasdk;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author shangbin
  * @version v1.0.0
  * @date 2021/7/8 15:12
  **/
-@Component
+@Repository
 public class PoolTemplate {
 
     public String testString(){
