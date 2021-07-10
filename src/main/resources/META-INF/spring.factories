@@ -1,1 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.mei.hui.k2javasdk.GirlAutoConfigure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.bao.hong.config.BeansConfig
