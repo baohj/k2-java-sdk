@@ -1,25 +1,25 @@
-package com.mei.hui;
+package com.bao.hong;
 
-import com.bao.hong.Application;
-import com.bao.hong.service.MeiHuiService;
+import com.bao.hong.service.K2Pool;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
+@RunWith(SpringRunner.class)
 @Slf4j
-class K2JavaSdkApplicationTests {
+public class ServiceTest {
 
     @Autowired
-    private MeiHuiService meiHuiService;
-
+    private K2Pool meiHuiService;
+    
     @Test
-    void contextLoads() {
-        log.info(meiHuiService.getConfig());
+    public void serviceTest(){
+        String str = meiHuiService.getConfig();
+        log.info(str);
+        
     }
-
 }
