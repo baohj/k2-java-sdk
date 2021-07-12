@@ -1,4 +1,4 @@
-package com.bao.hong.config;
+package com.bao.hong.common.config;
 
 import com.bao.hong.service.K2Pool;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

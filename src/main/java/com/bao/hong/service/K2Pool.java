@@ -1,7 +1,7 @@
 package com.bao.hong.service;
 
 
-import com.bao.hong.config.K2PoolProperties;
+import com.bao.hong.common.config.K2PoolProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class K2Pool {

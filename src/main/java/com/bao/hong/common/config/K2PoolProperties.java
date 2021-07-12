@@ -1,4 +1,4 @@
-package com.bao.hong.config;
+package com.bao.hong.common.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

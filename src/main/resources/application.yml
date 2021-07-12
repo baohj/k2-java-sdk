@@ -1,0 +1,8 @@
+server:
+  port: 8079
+
+spring:
+  application:
+    name: k2Pool-java-sdk
+k2pool:
+  name: 鲍红建
