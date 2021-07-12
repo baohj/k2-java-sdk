@@ -18,8 +18,11 @@ public class ServiceTest {
     
     @Test
     public void serviceTest(){
-        String str = meiHuiService.getConfig();
-        log.info(str);
+        /*String content = "美辉科技有限公司";
+        System.out.println("原文=" + content);
+        String s1 = AESUtil.encrypt(content);
+        System.out.println("加密结果=" + s1);
+        System.out.println("解密结果="+AESUtil.decrypt(s1));*/
         
     }
 }

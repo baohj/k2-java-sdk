@@ -14,6 +14,6 @@ public class TestController {
     @RequestMapping("/getConfig")
     public String getConfig(){
 
-        return service.getConfig();
+        return null;
     }
 }

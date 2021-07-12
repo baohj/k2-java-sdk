@@ -4,5 +4,11 @@ server:
 spring:
   application:
     name: k2Pool-java-sdk
+
 k2pool:
-  name: 鲍红建
+  #用户唯一标识
+  accessKey: 3e4434699e1347ed8245813f8c96f64f
+  #秘钥
+  secretKey: 98496561648451AZAHVGHXQVCXQy
+  #token过期时间,单位分钟
+  tokenExpires: 10
