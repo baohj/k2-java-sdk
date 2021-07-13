@@ -17,6 +17,7 @@ import java.util.Map;
 public class RSAUtil {
     private static Map<Integer, String> keyMap = new HashMap<>();  //用于封装随机产生的公钥与私钥
 
+    private static String publicKey = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMs9OYhgHTYeyhcv+rSKA4yqld+vet3E2pxsprTxtNIUwak5Utdlj6F/Papv8pF85sXZ8lKPhfckHKLJVDjC4HkCAwEAAQ==";
     private static K2PoolConfig config;
 
     public static void setK2PoolConfig(K2PoolConfig config) {
@@ -30,10 +31,10 @@ public class RSAUtil {
         String message = "美辉科技有限公司";
         System.out.println("随机生成的公钥为:" + keyMap.get(0));
         System.out.println("随机生成的私钥为:" + keyMap.get(1));
-        String messageEn = encrypt(message,keyMap.get(0));
+       /* String messageEn = encrypt(message,keyMap.get(0));
         System.out.println(message + "\t加密后的字符串为:" + messageEn);
         String messageDe = decrypt(messageEn,keyMap.get(1));
-        System.out.println("还原后的字符串为:" + messageDe);
+        System.out.println("还原后的字符串为:" + messageDe);*/
 
     }
 
@@ -61,13 +62,11 @@ public class RSAUtil {
      *
      * @param str
      *            加密字符串
-     * @param publicKey
-     *            公钥
      * @return 密文
      * @throws Exception
      *             加密过程中的异常信息
      */
-    public static String encrypt(String str,String publicKey) throws Exception{
+    public static String encrypt(String str) throws Exception{
         //base64编码的公钥
         byte[] decoded = Base64.decodeBase64(publicKey);
         RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance(Constants.RSA).generatePublic(new X509EncodedKeySpec(decoded));

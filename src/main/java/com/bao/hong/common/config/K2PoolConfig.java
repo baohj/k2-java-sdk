@@ -13,11 +13,6 @@ public class K2PoolConfig {
     private String accessKey;
 
     /**
-     * 秘钥
-     */
-    private String secretKey;
-
-    /**
      * token过期时间，单位分钟
      */
     private Long tokenExpires;
