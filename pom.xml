@@ -29,7 +29,6 @@
         <developerConnection>scm:git:https://github.com/baohj/k2Pool-java-sdk.git</developerConnection>
         <connection>scm:git:https://github.com/baohj/k2Pool-java-sdk.git</connection>
         <url>https://github.com/baohj/k2Pool-java-sdk</url>
-        <!--<tag>HEAD</tag>-->
     </scm>
 
     <parent>
