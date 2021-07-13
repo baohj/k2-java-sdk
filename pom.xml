@@ -5,9 +5,8 @@
 
     <groupId>io.k2pool</groupId>
     <artifactId>k2Pool-java-sdk</artifactId>
-    <!--<version>1.5.0-SNAPSHOT</version>-->
-    <version>1.6.0</version>
-    <name>k2-java-sdk</name>
+    <version>1.6.0-SNAPSHOT</version>
+    <name>k2Pool-java-sdk</name>
     <description>为了让用户快速接入平台而开发设计</description>
     <url>https://github.com/baohj/k2-java-sdk</url>
 
@@ -22,8 +21,7 @@
         <developer>
             <name>meihui</name>
             <email>baohongjian@meihuitech.com</email>
-            <organization>k2</organization>
-            <organizationUrl>https://k2pool.io/</organizationUrl>
+            <organization>https://github.com/baohj</organization>
         </developer>
     </developers>
 
@@ -172,11 +170,6 @@
                         <goals>
                             <goal>sign</goal>
                         </goals>
-                        <configuration>
-                            <executable>gpg2</executable>
-                            <keyname>D211B226664FC57F7FF131CCBAD8015143FF0674</keyname>
-                            <passphrase>Toppool1700!</passphrase>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
