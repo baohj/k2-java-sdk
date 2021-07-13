@@ -39,7 +39,6 @@ public class RSAUtil {
 
     /**
      * 随机生成密钥对
-     * @throws NoSuchAlgorithmException
      */
     public static void genKeyPair() throws NoSuchAlgorithmException {
         // KeyPairGenerator类用于生成公钥和私钥对，基于RSA算法生成对象

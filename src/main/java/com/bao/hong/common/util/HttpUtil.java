@@ -28,12 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @ClassName: HttpPostCommon
- * @Description: TODO(接口调用)
- * @author baohj
- * @date 2014年11月28日 下午1:30:09
- */
 @Slf4j
 public class HttpUtil {
 
@@ -59,9 +53,9 @@ public class HttpUtil {
 
 	/** 
 	 * 发送 GET 请求（支持HTTPS）K-V形式
-	 * @param url 
-	 * @param params 
-	 * @return 
+	 * @param url 地址
+	 * @param params 参数
+	 * @return string
 	 */  
 	public static String doGet(String url, Map<String, String> params) {
 		//组装参数
@@ -86,9 +80,10 @@ public class HttpUtil {
 
 	/**
 	 * 发送 GET 请求（支持HTTPS）
-	 * @param url
-	 * @param queryStr
-	 * @return
+	 * @param url 地址
+	 * @param queryStr 请求参数
+	 * @param heads 头信息
+	 * @return string
 	 */
 	public static String doGet(String url,String queryStr,Map<String, String> heads) {
 		String result = null;
@@ -135,7 +130,7 @@ public class HttpUtil {
 	 * 发送 POST 请求（支持HTTP和https），K-V形式 
 	 * @param url API接口URL
 	 * @param params 参数map 
-	 * @return 
+	 * @return  string
 	 */  
 	public static String doPost(String url, Map<String, String> params) {
 		log.info("@请求地址:"+url);
@@ -230,20 +225,21 @@ public class HttpUtil {
 
 	/** 
 	 * 发送 POST 请求（支持HTTP和https），JSON形式 
-	 * @param url
+	 * @param url 地址
 	 * @param json json对象 
-	 * @return 
+	 * @return string
 	 */  
 	public static String doPost(String url, String json) {
 		return doPost(url,json,null);
 	}
-	
 
-	/** 
-	 * 避免HttpClient的”SSLPeerUnverifiedException: peer not authenticated”异常 
+
+	/**
+	 * 避免HttpClient的”SSLPeerUnverifiedException: peer not authenticated”异常
 	 * 不用导入SSL证书
-	 * @return 
-	 */  
+	 * @param httpclient 参数
+	 * @return CloseableHttpClient
+	 */
 	public static CloseableHttpClient wrapClient(CloseableHttpClient httpclient) {  
 		try {
 			SSLContext ctx = SSLContext.getInstance("TLS");  
@@ -271,8 +267,8 @@ public class HttpUtil {
 
 	/**
 	 * 判断网路访问是否为https,如果是则返回true
-	 * @param url
-	 * @return
+	 * @param url 地址
+	 * @return boolean
 	 */
 	private static boolean isHttps(String url){
 		String scheme = url.substring(0,url.indexOf(":"));
@@ -282,11 +278,8 @@ public class HttpUtil {
 		return false;
 	}
 	/**
-	 * 
-	 * @Description: TODO(关闭CloseableHttpClient对象) 
-	 * @param @param httpClient    
-	 * @return void    返回类型 
-	 * @throws
+	 * 关闭CloseableHttpClient对象
+	 * @param httpClient 参数
 	 */
 	public static void closeClient(CloseableHttpClient httpClient){
 		if(httpClient != null){
@@ -298,11 +291,8 @@ public class HttpUtil {
 		}
 	}
 	/**
-	 * 
-	 * @Description: TODO(关闭CloseableHttpResponse对象) 
-	 * @param @param response    
-	 * @return void    返回类型 
-	 * @throws
+	 * 关闭CloseableHttpResponse对象
+	 * @param response
 	 */
 	public static void closeResponse(CloseableHttpResponse response){
 		if(response != null){
