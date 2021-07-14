@@ -6,7 +6,11 @@ spring:
     name: k2Pool-java-sdk
 
 k2pool:
+  #域名
+  domain: http://122.9.63.92:8071
   #用户唯一标识
   accessKey: 3e4434699e1347ed8245813f8c96f64f
+  #公钥
+  publicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQClR0SmhstfTecRki2jKX27Ya/gobnXYnFuB+SH1Bp5u9d/qXZ9gmW4IOTv7dnwrG6DyJp7R5xbxfYIDLYKB/6T/wwal5q43Eg8oEgYffWFkcLnvNHKy5b514nJy4rdNtI9YPZS93Y2Izbz6Pts0/J2S+bjC1OFYqD7Qa6K0rKiFQIDAQAB
   #token过期时间,单位分钟
   tokenExpires: 10

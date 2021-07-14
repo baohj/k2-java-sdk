@@ -1,13 +1,13 @@
-package com.bao.hong.common.util;
+package io.k2pool.common.util;
 
+import io.k2pool.common.Constants;
+import io.k2pool.common.ContentTypeEnum;
+import io.k2pool.common.config.K2PoolConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
@@ -15,8 +15,9 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -24,14 +25,19 @@ import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
 public class HttpUtil {
 
-	private static PoolingHttpClientConnectionManager connMgr;  
+	private static K2PoolConfig config;
+
+	public static void setConfig(K2PoolConfig config) {
+		HttpUtil.config = config;
+	}
+
+	private static PoolingHttpClientConnectionManager connMgr;
 	private static RequestConfig requestConfig;  
 	private static final int MAX_TIMEOUT = 60000;  
 
@@ -49,138 +55,12 @@ public class HttpUtil {
 		// 设置从连接池获取连接实例的超时  
 		configBuilder.setConnectionRequestTimeout(MAX_TIMEOUT);  
 		requestConfig = configBuilder.build();  
-	}  
-
-	/** 
-	 * 发送 GET 请求（支持HTTPS）K-V形式
-	 * @param url 地址
-	 * @param params 参数
-	 * @return string
-	 */  
-	public static String doGet(String url, Map<String, String> params) {
-		//组装参数
-		StringBuffer param = new StringBuffer();
-		if(params != null){
-			int i = 0;
-			for (String key : params.keySet()) {
-				if (i == 0)
-					param.append("?");
-				else
-					param.append("&");
-				param.append(key).append("=").append(params.get(key));
-				i++;
-			}
-		}
-		return doGet(url,param.toString());
 	}
-
-	public static String doGet(String url,String queryStr){
-		return doGet(url,queryStr,null);
-	}
-
-	/**
-	 * 发送 GET 请求（支持HTTPS）
-	 * @param url 地址
-	 * @param queryStr 请求参数
-	 * @param heads 头信息
-	 * @return string
-	 */
-	public static String doGet(String url,String queryStr,Map<String, String> heads) {
-		String result = null;
-		CloseableHttpResponse response = null;
-		CloseableHttpClient httpClient = null;
-		try {
-			httpClient = HttpClients.createDefault();
-			if(isHttps(url)){
-				httpClient = wrapClient(httpClient);
-			}
-			if(StringUtils.isNotEmpty(queryStr)){
-				url += "?"+queryStr;
-			}
-			log.info("@请求参数:"+url);
-			HttpGet httpget = new HttpGet(url);
-			//头信息
-			if(heads != null){
-				for (String key : heads.keySet()) {
-					httpget.setHeader(key, heads.get(key));
-				}
-			}
-			response = httpClient.execute(httpget);
-			int statusCode = response.getStatusLine().getStatusCode();
-			log.info("@响应状态码：statusCode = " + statusCode);
-			if(statusCode == 200){
-				HttpEntity entity = response.getEntity();
-				result = EntityUtils.toString(entity, "UTF-8");
-				log.info("@响应包体：" + result);
-			}
-		} catch (Exception e) {
-			log.error("请求失败", e);
-		}finally {
-			if(response != null){
-				closeResponse(response);
-			}
-			if(httpClient != null){
-				closeClient(httpClient);
-			}
-		}
-		return result;
-	}
-
-	/** 
-	 * 发送 POST 请求（支持HTTP和https），K-V形式 
-	 * @param url API接口URL
-	 * @param params 参数map 
-	 * @return  string
-	 */  
-	public static String doPost(String url, Map<String, String> params) {
+	
+	public static String doPost(String url, String body, Map<String, String> heads,ContentTypeEnum contentTypeEnum) {
+		url = config.getDomain()+url;
 		log.info("@请求地址:"+url);
-		String httpStr = null;  
-		CloseableHttpClient httpClient = null;
-		CloseableHttpResponse response = null;
-		try {  
-			httpClient = HttpClients.createDefault();
-			if(isHttps(url)){
-				httpClient = wrapClient(httpClient);
-			}
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			if(params != null){
-				for (String key : params.keySet()) {
-					nameValuePairs.add(new BasicNameValuePair(key,params.get(key)));  
-				}
-			}
-			log.info("@请求参数:"+url);
-			System.out.println("@请求参数:"+url);
-			HttpPost httpPost = new HttpPost(url);
-			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
-			httpPost.setConfig(requestConfig);  
-			response = httpClient.execute(httpPost);  
-			int statusCode = response.getStatusLine().getStatusCode();
-			log.info("@响应状态码：statusCode = " + statusCode);
-	
-			if(statusCode == 200){
-				HttpEntity entity = response.getEntity();  
-				httpStr = EntityUtils.toString(entity, "UTF-8");
-				log.info("@响应包体：" + httpStr);
-				System.out.println("@响应包体：" + httpStr);
-			}
-		} catch (Exception e) {
-			log.error("请求失败", e);
-		} finally {  
-			if(response != null){
-				closeResponse(response);
-			}
-			if(httpClient != null){
-				closeClient(httpClient);
-			}
-		}  
-		return httpStr;  
-	}  
-	
-	
-	public static String doPost(String url,String json,Map<String, String> heads) {
-		log.info("@请求地址:"+url);
-		log.info("@请求包体:"+json);
-		String httpStr = null;  
+		log.info("@请求包体:"+body);
 		CloseableHttpClient httpClient = null;
 		CloseableHttpResponse response = null;  
 		try { 
@@ -196,22 +76,25 @@ public class HttpUtil {
 				}
 			}
 			httpPost.setConfig(requestConfig);  
-			if(StringUtils.isNotEmpty(json)){
-				StringEntity stringEntity = new StringEntity(json,"UTF-8");//解决中文乱码问题
-				stringEntity.setContentEncoding("UTF-8");  
-				stringEntity.setContentType("application/json");  
+			if(StringUtils.isNotEmpty(body)){
+				StringEntity stringEntity = new StringEntity(body,"UTF-8");//解决中文乱码问题
+				stringEntity.setContentEncoding("UTF-8");
+				stringEntity.setContentType(contentTypeEnum.getContentType());
 				httpPost.setEntity(stringEntity);
 			}
 			response = httpClient.execute(httpPost);  
 			int statusCode = response.getStatusLine().getStatusCode();
 			log.info("@响应状态码：statusCode = {}",statusCode);
+			String httpStr = null;
 			if(statusCode == 200){
 				HttpEntity entity = response.getEntity();  
 				httpStr = EntityUtils.toString(entity, "UTF-8");
 				log.info("@响应包体：{}",httpStr);
 			}
+			return httpStr;
 		} catch (Exception e) {
 			log.error("请求失败", e);
+			throw new RuntimeException(e);
 		} finally {  
 			if(response != null){
 				closeResponse(response);
@@ -219,8 +102,7 @@ public class HttpUtil {
 			if(httpClient != null){
 				closeClient(httpClient);
 			}
-		}  
-		return httpStr; 
+		}
 	}
 
 	/** 
@@ -228,11 +110,15 @@ public class HttpUtil {
 	 * @param url 地址
 	 * @param json json对象 
 	 * @return string
-	 */  
-	public static String doPost(String url, String json) {
-		return doPost(url,json,null);
-	}
+	 */
 
+	public static String doPost(String url, String json,String token) {
+		Map<String, String> heads = new HashMap<>();
+		if(StringUtils.isNotEmpty(token)){
+			heads.put(Constants.TOKEN,token);
+		}
+		return doPost(url,json,heads,ContentTypeEnum.JSON);
+	}
 
 	/**
 	 * 避免HttpClient的”SSLPeerUnverifiedException: peer not authenticated”异常

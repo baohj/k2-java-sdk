@@ -1,6 +1,6 @@
-package com.bao.hong.controller;
+package io.k2pool.controller;
 
-import com.bao.hong.service.K2Pool;
+import io.k2pool.client.K2Pool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

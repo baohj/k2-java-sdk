@@ -1,4 +1,4 @@
-package com.bao.hong;
+package io.k2pool;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
