@@ -13,11 +13,11 @@
 
 		k2pool:
 		  #域名
-		  domain: http://122.9.63.92:8071
+		  domain: http://127.0.0.1:8071
 		  #用户唯一标识,由K2Pool提供
-		  accessKey: 3e4434699e1347ed8245813f8c96f64f
+		  accessKey: 3e4434699e1347ed8245883f8c96f64f
 		  #秘钥,用户自定义
-		  aesKey: 51966658308f4b7d8eec99d67d4eec5b
+		  aesKey: 51966658308f4b7d8eec93d67d4eec5b
 		  #token过期时间,单位分钟，默认30分钟
 		  tokenExpires: 30
 
