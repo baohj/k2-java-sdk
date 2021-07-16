@@ -1,76 +1,59 @@
 
-# k2-java-sdk 使用教程
+#                     <center>k2Pool-java-sdk 使用教程</center>
 
-Fastjson is a Java library that can be used to convert Java Objects into their JSON representation. It can also be used to convert a JSON string to an equivalent Java object. Fastjson can work with arbitrary Java objects including pre-existing objects that you do not have source-code of.
+## 第一步：引入依赖
 
-### Fastjson Goals
- * Provide the best performance on the server-side and android client
- * Provide simple toJSONString() and parseObject() methods to convert Java objects to JSON and vice-versa
- * Allow pre-existing unmodifiable objects to be converted to and from JSON
- * Extensive support of Java Generics
- * Allow custom representations for objects
- * Support arbitrarily complex objects (with deep inheritance hierarchies and extensive use of generic types)
+		<dependency>
+		    <groupId>io.k2pool</groupId>
+		    <artifactId>k2Pool-java-sdk</artifactId>
+		    <version>1.6.3</version>
+		</dependency>
 
-![fastjson](logo.jpg "fastjson")
+## 第二步：application.yml 中加入如下配置：
 
-## Documentation
+		k2pool:
+		  #域名
+		  domain: http://122.9.63.92:8071
+		  #用户唯一标识,由K2Pool提供
+		  accessKey: 3e4434699e1347ed8245813f8c96f64f
+		  #秘钥,用户自定义
+		  aesKey: 51966658308f4b7d8eec99d67d4eec5b
+		  #token过期时间,单位分钟，默认30分钟
+		  tokenExpires: 30
 
-- [Documentation Home](https://github.com/alibaba/fastjson/wiki)
-- [Contributing Code](https://github.com/nschaffner/fastjson/blob/master/CONTRIBUTING.md)
-- [Frequently Asked Questions](https://github.com/alibaba/fastjson/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
 
-## Benchmark
+## 第三步：获取 token 示例
 
-https://github.com/eishay/jvm-serializers/wiki
+		public class K2Test {
 
-## Download
+		    @Autowired
+		    private K2Pool k2Pool;
+	
+		    @Test
+		    public void tokenTest() {
+		        Result<TokenVO> token = k2Pool.getToken();
+		        System.out.println("token信息:{}");
+		        log.info("token信息:{}", JSON.toJSONString(token));
+		    }
+	    }
 
-- [maven][1]
-- [the latest JAR][2]
+## 第四步： 初始化 token
 
-[1]: https://repo1.maven.org/maven2/com/alibaba/fastjson/
-[2]: https://search.maven.org/remote_content?g=com.alibaba&a=fastjson&v=LATEST
+    K2Pool.init(String token);
 
-## Maven
+## 第五步: 使用 K2Pool 调用接口
 
-```xml
-<dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>fastjson</artifactId>
-    <version>1.2.76</version>
-</dependency>
-```
+	示例(1)
+          获取token,地址: http://ip:post/user-server/k2Pool/getToken
+	      sdk调用:k2Pool.getToken()
+	
+    示例(2)
+         获取全网数据:全网当前总算力、全网活跃矿工、32G/64G矿工封装Gas费用、32G/64G矿工质押成本,地址:http://ip:post/miner-server/k2Pool/network
+         sdk调用：k2Pool.network()
+    $ \color{red}{结论:api地址的最后一个单词即为方法名} $
 
-## Gradle via JCenter
 
-``` groovy
-compile 'com.alibaba:fastjson:1.2.76'
-```
+[api 文档][Wiki]
 
-``` groovy
-compile 'com.alibaba:fastjson:1.1.72.android'
-```
+[Wiki]: https://github.com/baohj/k2Pool-java-sdk.wiki.git
 
-Please see this [Wiki Download Page][Wiki] for more repository info.
-
-[Wiki]: https://github.com/alibaba/fastjson/wiki#download
-
-### *License*
-
-Fastjson is released under the [Apache 2.0 license](license.txt).
-
-```
-Copyright 1999-2020 Alibaba Group Holding Ltd.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at the following link.
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
