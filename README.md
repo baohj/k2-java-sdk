@@ -36,10 +36,12 @@
 		        log.info("token信息:{}", JSON.toJSONString(token));
 		    }
 	    }
+<font color="red">K2Pool 客户端对象,方便用户调用平台 api 接口</font>
 
 ## 第四步： 初始化 token
 
     K2Pool.init(String token);
+<font color="red">推荐使用定时器，定时更新 token 并初始化</font>
 
 ## 第五步: 使用 K2Pool 调用接口
 
@@ -50,10 +52,10 @@
     示例(2)
          获取全网数据:全网当前总算力、全网活跃矿工、32G/64G矿工封装Gas费用、32G/64G矿工质押成本,地址:http://ip:post/miner-server/k2Pool/network
          sdk调用：k2Pool.network()
-    $ \color{red}{结论:api地址的最后一个单词即为方法名} $
+
+<font color="red">结论：api地址最后一个斜杠后面的字符串即为相对应的方法名</font>
 
 
 [api 文档][Wiki]
 
-[Wiki]: https://github.com/baohj/k2Pool-java-sdk.wiki.git
-
+[Wiki]:https://github.com/baohj/k2Pool-java-sdk/wiki
