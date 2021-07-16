@@ -44,7 +44,7 @@ public class K2Pool {
     /**
      * 获取全网数据
      */
-    public Result<ForeignNetworkVO> network(String token){
+    public Result<ForeignNetworkVO> network(){
         String resutl = HttpUtil.doPost(Constants.network_url,null, token);
         Result<ForeignNetworkVO> vo = JSON.parseObject(resutl, new TypeReference<Result<ForeignNetworkVO>>(){});
         return vo;
@@ -52,7 +52,7 @@ public class K2Pool {
     /**
      * 获取平台数据
      */
-    public Result<ForeignPlatformVO> platform(String token){
+    public Result<ForeignPlatformVO> platform(){
         String resutl = HttpUtil.doPost(Constants.platform_url,null, token);
         Result<ForeignPlatformVO> vo = JSON.parseObject(resutl, new TypeReference<Result<ForeignPlatformVO>>(){});
         return vo;
@@ -60,7 +60,7 @@ public class K2Pool {
     /**
      * 获取平台旷工数据
      */
-    public Result<ForeignSysMinerInfoVO> miner(String minerId,String token){
+    public Result<ForeignSysMinerInfoVO> miner(String minerId){
         JSONObject json = new JSONObject();
         json.put("minerId",minerId);
         String resutl = HttpUtil.doPost(Constants.miner_url,json.toJSONString(), token);
@@ -70,7 +70,7 @@ public class K2Pool {
     /**
      * 获取平台旷工数据
      */
-    public Result<List<ForeignSysMinerInfoVO>> user(String apiKey,String token){
+    public Result<List<ForeignSysMinerInfoVO>> user(String apiKey){
         JSONObject json = new JSONObject();
         json.put("apiKey",apiKey);
         String resutl = HttpUtil.doPost(Constants.user_url,json.toJSONString(), token);
