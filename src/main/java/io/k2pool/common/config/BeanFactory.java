@@ -1,8 +1,8 @@
 package io.k2pool.common.config;
 
 import io.k2pool.client.K2Pool;
+import io.k2pool.common.util.AESUtil;
 import io.k2pool.common.util.HttpUtil;
-import io.k2pool.common.util.RSAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ public class BeanFactory {
     @Bean
     public K2Pool k2Pool() {
         HttpUtil.setConfig(config);
-        RSAUtil.setConfig(config);
+        AESUtil.setConfig(config);
         return new K2Pool();
     }
 
