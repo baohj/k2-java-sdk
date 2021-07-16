@@ -17,6 +17,12 @@ import java.util.List;
 
 public class K2Pool {
 
+    private static String token = null;
+
+    public static void init(String token) {
+        K2Pool.token = token;
+    }
+
     @Autowired
     private K2PoolConfig config;
     /**

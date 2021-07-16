@@ -111,6 +111,9 @@ public class HttpUtil {
 	 */
 
 	public static String doPost(String url, String json,String token) {
+		if(!Constants.token_url.equals(url) && StringUtils.isEmpty(token)){
+			throw new RuntimeException("请初始化token值");
+		}
 		Map<String, String> heads = new HashMap<>();
 		if(StringUtils.isNotEmpty(token)){
 			heads.put(Constants.TOKEN,token);

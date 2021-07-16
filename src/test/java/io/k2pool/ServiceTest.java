@@ -25,7 +25,5 @@ public class ServiceTest {
         log.info("秘钥:{}",uuid);*/
         Result<TokenVO> sr = k2Pool.getToken();
         log.info("返回值:{}", JSON.toJSONString(sr));
-
-        
     }
 }
