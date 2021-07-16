@@ -3,7 +3,6 @@ package io.k2pool;
 import com.alibaba.fastjson.JSON;
 import io.k2pool.client.K2Pool;
 import io.k2pool.common.Result;
-import io.k2pool.common.util.AESUtil;
 import io.k2pool.entity.TokenVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -11,9 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import sun.plugin.util.UIUtil;
-
-import java.util.UUID;
 
 @SpringBootTest(classes = Application.class)
 @RunWith(SpringRunner.class)
