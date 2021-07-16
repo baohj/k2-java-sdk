@@ -20,7 +20,6 @@ public class K2Pool {
     private K2PoolConfig config;
     /**
      * 获取token
-     * @return
      */
     public Result<TokenVO> getToken(){
         TokenBO tokenBO = new TokenBO().setAccessKey(config.getAccessKey()).setTokenExpires(config.getTokenExpires());
@@ -46,7 +45,6 @@ public class K2Pool {
     }
     /**
      * 获取平台数据
-     * @return
      */
     public Result<ForeignPlatformVO> platform(){
         String resutl = HttpUtil.doPost(Constants.platform_url,null, null);
@@ -55,7 +53,6 @@ public class K2Pool {
     }
     /**
      * 获取平台旷工数据
-     * @return
      */
     public Result<ForeignSysMinerInfoVO> miner(){
         String resutl = HttpUtil.doPost(Constants.miner_url,null, null);
@@ -64,7 +61,6 @@ public class K2Pool {
     }
     /**
      * 获取平台旷工数据
-     * @return
      */
     public Result<List<ForeignSysMinerInfoVO>> user(){
         String resutl = HttpUtil.doPost(Constants.user_url,null, null);
