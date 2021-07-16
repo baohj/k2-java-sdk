@@ -3,6 +3,7 @@ package io.k2pool.client;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.k2pool.common.Constants;
 import io.k2pool.common.Result;
 import io.k2pool.common.config.K2PoolConfig;
@@ -53,16 +54,20 @@ public class K2Pool {
     /**
      * 获取平台旷工数据
      */
-    public Result<ForeignSysMinerInfoVO> miner(String token){
-        String resutl = HttpUtil.doPost(Constants.miner_url,null, token);
+    public Result<ForeignSysMinerInfoVO> miner(String minerId,String token){
+        JSONObject json = new JSONObject();
+        json.put("minerId",minerId);
+        String resutl = HttpUtil.doPost(Constants.miner_url,json.toJSONString(), token);
         Result<ForeignSysMinerInfoVO> vo = JSON.parseObject(resutl, new TypeReference<Result<ForeignSysMinerInfoVO>>(){});
         return vo;
     }
     /**
      * 获取平台旷工数据
      */
-    public Result<List<ForeignSysMinerInfoVO>> user(String token){
-        String resutl = HttpUtil.doPost(Constants.user_url,null, token);
+    public Result<List<ForeignSysMinerInfoVO>> user(String apiKey,String token){
+        JSONObject json = new JSONObject();
+        json.put("apiKey",apiKey);
+        String resutl = HttpUtil.doPost(Constants.user_url,json.toJSONString(), token);
         Result<List<ForeignSysMinerInfoVO>> vo = JSON.parseObject(resutl, new TypeReference<Result<List<ForeignSysMinerInfoVO>>>(){});
         return vo;
     }
