@@ -37,32 +37,32 @@ public class K2Pool {
     /**
      * 获取全网数据
      */
-    public Result<ForeignNetworkVO> network(){
-        String resutl = HttpUtil.doPost(Constants.network_url,null, null);
+    public Result<ForeignNetworkVO> network(String token){
+        String resutl = HttpUtil.doPost(Constants.network_url,null, token);
         Result<ForeignNetworkVO> vo = JSON.parseObject(resutl, new TypeReference<Result<ForeignNetworkVO>>(){});
         return vo;
     }
     /**
      * 获取平台数据
      */
-    public Result<ForeignPlatformVO> platform(){
-        String resutl = HttpUtil.doPost(Constants.platform_url,null, null);
+    public Result<ForeignPlatformVO> platform(String token){
+        String resutl = HttpUtil.doPost(Constants.platform_url,null, token);
         Result<ForeignPlatformVO> vo = JSON.parseObject(resutl, new TypeReference<Result<ForeignPlatformVO>>(){});
         return vo;
     }
     /**
      * 获取平台旷工数据
      */
-    public Result<ForeignSysMinerInfoVO> miner(){
-        String resutl = HttpUtil.doPost(Constants.miner_url,null, null);
+    public Result<ForeignSysMinerInfoVO> miner(String token){
+        String resutl = HttpUtil.doPost(Constants.miner_url,null, token);
         Result<ForeignSysMinerInfoVO> vo = JSON.parseObject(resutl, new TypeReference<Result<ForeignSysMinerInfoVO>>(){});
         return vo;
     }
     /**
      * 获取平台旷工数据
      */
-    public Result<List<ForeignSysMinerInfoVO>> user(){
-        String resutl = HttpUtil.doPost(Constants.user_url,null, null);
+    public Result<List<ForeignSysMinerInfoVO>> user(String token){
+        String resutl = HttpUtil.doPost(Constants.user_url,null, token);
         Result<List<ForeignSysMinerInfoVO>> vo = JSON.parseObject(resutl, new TypeReference<Result<List<ForeignSysMinerInfoVO>>>(){});
         return vo;
     }
