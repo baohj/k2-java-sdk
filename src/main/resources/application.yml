@@ -7,7 +7,7 @@ spring:
 
 k2pool:
   #域名
-  domain: http://122.9.63.92:8071
+  domain: http://127.0.0.1:8071
   #用户唯一标识
   accessKey: 3e4434699e1347ed8245813f8c96f64f
 
