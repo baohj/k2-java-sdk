@@ -1,7 +1,9 @@
 package io.k2pool.common.util;
 
+import com.alibaba.fastjson.JSON;
 import io.k2pool.common.Constants;
 import io.k2pool.common.ContentTypeEnum;
+import io.k2pool.common.Result;
 import io.k2pool.common.config.K2PoolConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -88,6 +90,9 @@ public class HttpUtil {
 				HttpEntity entity = response.getEntity();  
 				httpStr = EntityUtils.toString(entity, "UTF-8");
 				log.info("@响应包体：{}",httpStr);
+			}else if(statusCode == 401){
+				Result result = new Result().setCode("111004").setMsg("token验签错误");
+				httpStr = JSON.toJSONString(result);
 			}
 			return httpStr;
 		} catch (Exception e) {
