@@ -46,7 +46,6 @@ public class AESUtil {
     /**
      * AES 解密操作
      * @param content 解决文本
-     * @return
      */
     public static String decrypt(String content) {
         try {
@@ -65,8 +64,6 @@ public class AESUtil {
 
     /**
      * 生成加密秘钥
-     *
-     * @return
      */
     private static Key getSecretKey(final String key) {
         try {
@@ -85,9 +82,7 @@ public class AESUtil {
 
     /**
      * 字节数组转Base64编码
-     *
      * @param bytes
-     * @return
      */
     private static String byte2Base64(byte[] bytes) {
         BASE64Encoder encoder = new BASE64Encoder();
@@ -97,7 +92,6 @@ public class AESUtil {
     /**
      * Base64编码转字节数组
      * @param base64Key
-     * @return
      * @throws Exception
      */
     private static byte[] base642Byte(String base64Key) throws Exception {

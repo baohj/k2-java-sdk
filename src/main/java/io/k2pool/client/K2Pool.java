@@ -36,7 +36,6 @@ public class K2Pool {
     }
     /**
      * 获取全网数据
-     * @return
      */
     public Result<ForeignNetworkVO> network(){
         String resutl = HttpUtil.doPost(Constants.network_url,null, null);
