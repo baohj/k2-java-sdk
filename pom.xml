@@ -4,7 +4,7 @@
 
     <groupId>io.k2pool</groupId>
     <artifactId>k2Pool-java-sdk</artifactId>
-    <version>1.6.4</version>
+    <version>1.6.5-SNAPSHOT</version>
     <name>k2Pool-java-sdk</name>
     <description>为了让用户快速接入平台而开发设计</description>
     <url>https://github.com/baohj/k2Pool-java-sdk</url>
@@ -28,7 +28,7 @@
         <developerConnection>scm:git:https://github.com/baohj/k2Pool-java-sdk.git</developerConnection>
         <connection>scm:git:https://github.com/baohj/k2Pool-java-sdk.git</connection>
         <url>https://github.com/baohj/k2Pool-java-sdk</url>
-      <tag>v1.6.4</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <parent>
