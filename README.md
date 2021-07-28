@@ -40,7 +40,20 @@
 
 ## 第四步： 初始化 token
 
-    K2Pool.init(String token);
+	@Configuration
+	@EnableScheduling
+	public class UpdateTokenTask {
+	    @Autowired
+	    private K2Pool k2Pool;
+	    /**
+	     * 刷新时间需要比token过期时间小
+	     */
+	    @Scheduled(cron = "0 */25 * * * ?")
+	    public void run() {
+		Result<TokenVO> result = k2Pool.getToken();
+		K2Pool.init(result.getData().getToken());
+	    }
+	}
 <font color="red">推荐使用定时器，定时更新 token 并初始化</font>
 
 ## 第五步: 使用 K2Pool 调用接口
