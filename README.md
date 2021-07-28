@@ -6,7 +6,7 @@
 		<dependency>
 		    <groupId>io.k2pool</groupId>
 		    <artifactId>k2Pool-java-sdk</artifactId>
-		    <version>1.6.3</version>
+		    <version>1.6.4</version>
 		</dependency>
 
 ## 第二步：application.yml 中加入如下配置：
